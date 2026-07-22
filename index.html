@@ -22,15 +22,15 @@
 </head>
 <body>
 
-    <!-- الأبديت والنقطة المخفية وملف الصوت المحلي -->
+    <!-- الأبديت والنقطة المخفية وملف الصوت Haha.mp3 -->
     <div id="updateLayer">
         <div class="secret-dot" onclick="checkAdmin()"></div>
         <div class="box">
-            <h1>SYSTEM SOON!</h1>
+            <h1>SYSTEM UPDATE</h1>
             <p style="opacity: 0.7; margin-top: 10px;">جاري تحديث النظام...</p>
         </div>
         <audio id="updateAudio" loop>
-            <source src="haha.mp3" type="audio/mpeg">
+            <source src="Haha.mp3" type="audio/mpeg">
         </audio>
     </div>
 
@@ -47,7 +47,7 @@
 
 <script>
     // === التحكم في الأبديت والصوت ===
-    const isUpdateActive = true; // غيرها لـ true لتجربة إظهار الأبديت والصوت
+    const isUpdateActive = false; // غيرها لـ true لتجربة إظهار الأبديت وصوت Haha.mp3
     
     window.onload = () => { 
         if (isUpdateActive) {
