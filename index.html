@@ -22,17 +22,14 @@
 </head>
 <body>
 
-    <!-- نافذة البدء مع زرار Start والأغنية -->
+    <!-- نافذة البدء مع زرار Start فقط -->
     <div id="updateLayer">
         <div class="secret-dot" onclick="checkAdmin()"></div>
         <div class="box">
             <h1>DELTA MAX</h1>
-            <p style="opacity: 0.7; margin: 15px 0;">اضغط Start لدخول الموقع وتشغيل الصوت</p>
+            <p style="opacity: 0.7; margin: 15px 0;">اضغط Start لدخول الموقع</p>
             <button class="btn main-btn" onclick="startAudioAndSite()" style="margin: 0 auto;">Start</button>
         </div>
-        <audio id="updateAudio" preload="auto" loop>
-            <source src="Music.mp3" type="audio/mpeg">
-        </audio>
     </div>
 
     <div class="secret-dot" onclick="checkAdmin()"></div>
@@ -47,13 +44,20 @@
     <button onclick="toggleLang()" style="margin-top:20px; background:none; border:1px solid #fff; color:#fff; padding:5px 15px; border-radius:5px; cursor:pointer;">عربي / English</button>
 
 <script>
-    // زرار Start لتشغيل الأغنية فوراً وإخفاء النافذة
+    let globalAudio = null;
+
+    // تشغيل الصوت عن طريق الجافاسكريبت فور الضغط على زرار Start
     function startAudioAndSite() {
-        let audio = document.getElementById('updateAudio');
-        audio.play().then(() => {
+        if (!globalAudio) {
+            globalAudio = new Audio('Music.mp3');
+            globalAudio.loop = true;
+        }
+        
+        globalAudio.play().then(() => {
             document.getElementById('updateLayer').style.display = 'none';
         }).catch(e => {
-            alert("تأكد أن ملف Music.mp3 مرفوع في نفس الفولدر مع الكود وبنفس الحروف الصغيرة تماماً");
+            alert("تأكد أن ملف الأغنية مرفوع في جيت هب واسمه Music.mp3 بالضبط");
+            document.getElementById('updateLayer').style.display = 'none';
         });
     }
 
@@ -62,7 +66,7 @@
         if (p === "1234") {
             alert("Admin Access Granted");
             document.getElementById('updateLayer').style.display = 'none';
-            document.getElementById('updateAudio').pause();
+            if (globalAudio) globalAudio.pause();
         } else {
             alert("Wrong Code!");
         }
