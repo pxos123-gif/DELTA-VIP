@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <!-- نافذة الأبديت وزرار Start والأغنية -->
+    <!-- نافذة الأبديت وزرار Start وأغنيتك الخاصة Music.mp3 -->
     <div id="updateLayer">
         <div class="secret-dot" onclick="checkAdmin()"></div>
         <div class="box">
@@ -31,7 +31,7 @@
             <button class="btn main-btn" onclick="startAudioAndSite()" style="margin: 0 auto;">Start</button>
         </div>
         <audio id="updateAudio" preload="auto" loop>
-            <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
+            <source src="Music.mp3" type="audio/mpeg">
         </audio>
     </div>
 
@@ -60,11 +60,15 @@
         }
     });
 
-    // تشغيل الأغنية وإخفاء نافذة الأبديت عند الضغط على Start
+    // تشغيل أغنيتك المحلية وإخفاء نافذة الأبديت بكل هدوء
     function startAudioAndSite() {
         let audio = document.getElementById('updateAudio');
-        audio.play().catch(() => {});
-        document.getElementById('updateLayer').style.display = 'none';
+        audio.play().then(() => {
+            document.getElementById('updateLayer').style.display = 'none';
+        }).catch(e => {
+            // لو المتصفح حب يمنع التشغيل التلقائي، هندخلك للموقع برضو من غير رسايل مزعجة
+            document.getElementById('updateLayer').style.display = 'none';
+        });
     }
 
     function checkAdmin() {
