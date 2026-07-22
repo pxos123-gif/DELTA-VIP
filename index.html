@@ -7,8 +7,8 @@
         body { margin: 0; height: 100vh; background: linear-gradient(270deg, #ff0000, #000000, #00b0ff); background-size: 600% 600%; animation: gradientMove 10s ease infinite; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Segoe UI', sans-serif; color: #fff; text-align: center; }
         @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* نافذة البداية */
-        #updateLayer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        /* نافذة الأبديت */
+        #updateLayer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px); display: none; flex-direction: column; justify-content: center; align-items: center; }
         .box { padding: 40px; border: 2px solid rgba(255, 0, 0, 0.5); border-radius: 20px; background: rgba(0, 0, 0, 0.5); text-align: center; }
         .secret-dot { width: 80px; height: 40px; cursor: pointer; background: transparent; z-index: 10000; position: absolute; top: 10%; }
 
@@ -22,12 +22,12 @@
 </head>
 <body>
 
-    <!-- نافذة البدء وزرار Start والأغنية -->
+    <!-- نافذة الأبديت وزرار Start والأغنية -->
     <div id="updateLayer">
         <div class="secret-dot" onclick="checkAdmin()"></div>
         <div class="box">
-            <h1>DELTA MAX</h1>
-            <p style="opacity: 0.7; margin: 15px 0;">اضغط Start لدخول الموقع</p>
+            <h1>SYSTEM UPDATE</h1>
+            <p style="opacity: 0.7; margin: 15px 0;">اضغط Start لتشغيل الأغنية والدخول</p>
             <button class="btn main-btn" onclick="startAudioAndSite()" style="margin: 0 auto;">Start</button>
         </div>
         <audio id="updateAudio" preload="auto" loop>
@@ -47,7 +47,20 @@
     <button onclick="toggleLang()" style="margin-top:20px; background:none; border:1px solid #fff; color:#fff; padding:5px 15px; border-radius:5px; cursor:pointer;">عربي / English</button>
 
 <script>
-    // تشغيل الأغنية وإخفاء النافذة بهدوء من غير أي رسايل مزعجة
+    // === متغير التحكم في إظهار أو إخفاء الأبديت ===
+    // خليه true عشان تظهر شاشة الأبديت، أو false عشان تختفي وتدخل على الموقع علطول
+    const isUpdateActive = true; 
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const updateLayer = document.getElementById('updateLayer');
+        if (isUpdateActive === true) {
+            updateLayer.style.display = 'flex';
+        } else {
+            updateLayer.style.display = 'none';
+        }
+    });
+
+    // تشغيل الأغنية وإخفاء نافذة الأبديت عند الضغط على Start
     function startAudioAndSite() {
         let audio = document.getElementById('updateAudio');
         audio.play().catch(() => {});
