@@ -379,7 +379,7 @@
             setTimeout(() => {
                 gateway.style.display = 'none';
                 
-                if (isUpdateActive === false) {
+                if (isUpdateActive === true) {
                     audio.play().catch(error => {
                         console.log("Audio play blocked or failed:", error);
                     });
