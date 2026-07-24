@@ -111,7 +111,7 @@
             100% { transform: scale(3.2); opacity: 0; }
         }
 
-        /* شاشة سيستم الأبديت الاحترافية */
+        /* شاشة سيستم الأبديت الاحترافية (بحجم أكبر وأكثر فخامة) */
         #updateLayer { 
             position: fixed; 
             top: 0; 
@@ -139,17 +139,17 @@
         .update-box { padding: 30px; text-align: center; display: flex; flex-direction: column; align-items: center; }
 
         .update-badge {
-            width: 120px;
-            height: 120px;
+            width: 160px; /* تم تكبير المقاس ليصبح أخم وأوضح */
+            height: 160px; /* تم تكبير المقاس */
             background: radial-gradient(circle, #ff0055 0%, #220033 80%);
-            border: 3px solid #ff3388;
+            border: 4px solid #ff3388;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 45px rgba(255, 0, 100, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 55px rgba(255, 0, 100, 0.9), inset 0 0 30px rgba(255, 255, 255, 0.5);
             animation: softUpDown 2.5s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             overflow: hidden;
         }
 
@@ -165,13 +165,13 @@
         }
 
         @keyframes glowPulse {
-            0% { filter: hue-rotate(0deg); box-shadow: 0 0 30px rgba(255, 0, 100, 0.6); }
-            50% { filter: hue-rotate(40deg); box-shadow: 0 0 60px rgba(255, 50, 100, 0.9); }
-            100% { filter: hue-rotate(0deg); box-shadow: 0 0 30px rgba(255, 0, 100, 0.6); }
+            0% { filter: hue-rotate(0deg); box-shadow: 0 0 35px rgba(255, 0, 100, 0.6); }
+            50% { filter: hue-rotate(40deg); box-shadow: 0 0 70px rgba(255, 50, 100, 0.95); }
+            100% { filter: hue-rotate(0deg); box-shadow: 0 0 35px rgba(255, 0, 100, 0.6); }
         }
 
         .update-title { 
-            font-size: 2.4em; 
+            font-size: 2.6em; 
             font-weight: bold; 
             color: #ff3388; 
             text-shadow: 0 0 25px rgba(255, 50, 150, 0.9); 
@@ -211,7 +211,7 @@
 
         .secret-dot { width: 80px; height: 40px; cursor: pointer; background: transparent; z-index: 10000; position: absolute; top: 10%; }
 
-        /* الشاشة الرئيسية لدلتا ماكس (أيقونة متحركة متوهجة + اسم بينور بشكل جامد) */
+        /* الشاشة الرئيسية لدلتا ماكس */
         .main-container {
             display: flex;
             flex-direction: column;
@@ -263,7 +263,6 @@
             text-shadow: 0 0 10px rgba(255, 0, 50, 0.4);
         }
         
-        /* زر Download APK بتصميم راقي ومتوهج مع تأثير حركة عند الضغط */
         .btn { 
             width: 250px; 
             padding: 16px; 
@@ -332,7 +331,7 @@
 </head>
 <body>
 
-    <!-- البوابة الأولى (دلتا ماكس المتوهجة والمضيئة) -->
+    <!-- البوابة الأولى -->
     <div id="gatewayLayer" onclick="handleGatewayClick(event)">
         <div class="pro-image-badge">
             <img src="logo.png" alt="Delta Logo">
@@ -363,8 +362,8 @@
 
     <div class="secret-dot" onclick="checkAdmin()"></div>
 
-    <!-- القائمة الأساسية لدلتا ماكس -->
-    <div class="main-container" id="mainContainer">
+    <!-- القائمة الأساسية لدلتا ماكس (مخفية افتراضياً لو الأبديت شغالة، وتظهر فوراً لو الأبديت false) -->
+    <div class="main-container" id="mainContainer" style="display: none;">
         <div class="main-badge">
             <img src="logo.png" alt="Delta Logo">
         </div>
@@ -382,6 +381,7 @@
     </div>
 
 <script>
+    // التحكم الكامل هنا: لو true يدخل سيستم الأبديت، لو false يوديك لدلتا ماكس الرئيسية مباشرة
     const isUpdateActive = true; 
 
     function handleGatewayClick(event) {
@@ -403,6 +403,7 @@
                 gateway.style.display = 'none';
                 
                 if (isUpdateActive === true) {
+                    // تشغيل سيستم الأبديت حصرياً
                     audio.play().catch(error => {
                         console.log("Audio play blocked or failed:", error);
                     });
@@ -412,21 +413,20 @@
                         updateLayer.style.opacity = '1';
                     }, 50);
                 } else {
+                    // تخطي الأبديت والدخول لصفحة دلتا ماكس الرئيسية مباشرة
                     audio.pause();
                     audio.currentTime = 0;
                     document.getElementById('updateLayer').style.display = 'none';
+                    let mainC = document.getElementById('mainContainer');
+                    mainC.style.display = 'flex';
                 }
             }, 500);
         }, 180);
     }
 
-    /* حركة الضغط لزر Download APK (نفس حركة السيستم أبديت الاحترافية) */
     function handleDownloadClick(event) {
-        event.preventDefault(); // منع الرابط الوهمي مؤقتاً لملاحظة التأثير الاحترافي
-        
+        event.preventDefault();
         let btn = event.currentTarget;
-        
-        // تأثير الدائرة الحمراء عند الضغط على الزر
         let circle = document.createElement('div');
         circle.classList.add('click-ripple');
         let rect = btn.getBoundingClientRect();
@@ -437,10 +437,8 @@
         btn.appendChild(circle);
         setTimeout(() => circle.remove(), 550);
 
-        // محاكاة التحويل السلس الاحترافي للتحميل
         setTimeout(() => {
             alert("جارٍ بدء تحويلك لملف التحميل الاحترافي...");
-            // هنا تقدر تحط رابط التحميل المباشر بتاعك مكان الحتة دي لو حابب
         }, 400);
     }
 
@@ -455,6 +453,8 @@
             document.getElementById('gatewayLayer').style.display = 'none';
             let audio = document.getElementById('updateAudio');
             audio.pause();
+            // إظهار القائمة الرئيسية فور تخطي الأدمن
+            document.getElementById('mainContainer').style.display = 'flex';
         } else {
             alert("Wrong Code!");
         }
