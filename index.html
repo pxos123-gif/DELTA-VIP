@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>DELTA MAX</title>
+    <!-- أيقونة التاب فوق في المتصفح بحرف الـ D الجديد -->
+    <link rel="icon" type="image/png" href="logo.png">
     <!-- استدعاء أيقونات FontAwesome لأيقونات التليجرام والميسنجر -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -52,9 +54,13 @@
             box-shadow: 0 0 30px rgba(255, 0, 50, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.4);
             animation: deltaGlowPulse 1.8s ease-in-out infinite alternate;
             margin-bottom: 22px;
-            font-size: 3.8em;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+        }
+
+        .pro-image-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         @keyframes deltaGlowPulse {
@@ -144,7 +150,13 @@
             box-shadow: 0 0 45px rgba(255, 0, 100, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.4);
             animation: softUpDown 2.5s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite;
             margin-bottom: 20px;
-            font-size: 3.5em;
+            overflow: hidden;
+        }
+
+        .update-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         @keyframes softUpDown {
@@ -225,8 +237,13 @@
             box-shadow: 0 0 25px rgba(255, 0, 50, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.4);
             animation: deltaGlowPulse 1.8s ease-in-out infinite alternate;
             margin-bottom: 15px;
-            font-size: 3.2em;
-            color: #fff;
+            overflow: hidden;
+        }
+
+        .main-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .title { 
@@ -317,7 +334,9 @@
 
     <!-- البوابة الأولى (دلتا ماكس المتوهجة والمضيئة) -->
     <div id="gatewayLayer" onclick="handleGatewayClick(event)">
-        <div class="pro-image-badge">⚡</div>
+        <div class="pro-image-badge">
+            <img src="logo.png" alt="Delta Logo">
+        </div>
         <div class="image-title">DELTA MAX</div>
         <div class="image-text">اضغط للدخول</div>
     </div>
@@ -326,7 +345,9 @@
     <div id="updateLayer">
         <div class="secret-dot" onclick="checkAdmin()"></div>
         <div class="update-box">
-            <div class="update-badge">⚡</div>
+            <div class="update-badge">
+                <img src="logo.png" alt="Delta Logo">
+            </div>
             <div class="update-title">SOON!</div>
             <div class="update-social-container">
                 <a href="https://t.me/aimbotff44" class="update-social-btn" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
@@ -342,9 +363,11 @@
 
     <div class="secret-dot" onclick="checkAdmin()"></div>
 
-    <!-- القائمة الأساسية لدلتا ماكس (بشكل منور ومتوهج وبنفس حركة السيستم أبديت عند الضغط) -->
+    <!-- القائمة الأساسية لدلتا ماكس -->
     <div class="main-container" id="mainContainer">
-        <div class="main-badge">⚡</div>
+        <div class="main-badge">
+            <img src="logo.png" alt="Delta Logo">
+        </div>
         <div class="title" id="titleText">Delta Max</div>
         <div class="sub" id="subText">@PX! @CLOSE'A1 @تكنو</div>
 
